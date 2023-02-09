@@ -2,18 +2,30 @@ from rest_framework import serializers
 from .models import Task
 from profiles.models import TaskManagerUser
 
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = TaskManagerUser
-        fields = [
-            'id', 'username'
-        ]
+        fields = ["id", "username"]
+
 
 class TaskSerializer(serializers.ModelSerializer):
-    assignees = UserSerializer(many=True)
-    owner = UserSerializer()
+    assignees_details = UserSerializer(read_only=True, many=True)
+    owner = UserSerializer(read_only=True)
+
     class Meta:
         model = Task
         fields = [
-            'id', 'owner', 'assignees', 'description', 'created_at', 'updated_at'
+            "id",
+            "owner",
+            "owner_id",
+            "assignees",
+            "assignees_details",
+            "description",
+            "created_at",
+            "updated_at",
         ]
+
+    def save(self, **kwargs):
+        self.validated_data["owner_id"] = self.context["request"].user.id
+        return super().save(**kwargs)
