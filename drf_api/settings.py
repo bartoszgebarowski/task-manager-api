@@ -22,7 +22,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("ENV") == "DEVELOPMENT"
 
-ALLOWED_HOSTS = ["pp5-drf-task-api.herokuapp.com/", "localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["pp5-drf-task-api.herokuapp.com", "localhost", "127.0.0.1"]
 
 
 # Application definition
