@@ -6,6 +6,10 @@ import dj_database_url
 if os.path.isfile("env.py"):
     import env
 
+import mimetypes
+
+mimetypes.add_type("text/javascript", ".js", True)
+
 CLOUDINARY_STORAGE = {"CLOUDINARY_URL": os.environ.get("CLOUDINARY_URL")}
 
 
