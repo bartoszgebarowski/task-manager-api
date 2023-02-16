@@ -76,18 +76,7 @@ WSGI_APPLICATION = "drf_api.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-if DEBUG:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.postgresql",
-            "HOST": os.getenv("DB_HOST"),
-            "NAME": os.getenv("DB_NAME"),
-            "USER": os.getenv("DB_USER"),
-            "PASSWORD": os.getenv("DB_PASS"),
-        }
-    }
-else:
-    DATABASES = {"default": dj_database_url.parse(os.environ["DATABASE_URL"])}
+DATABASES = {"default": dj_database_url.parse(os.environ["DATABASE_URL"])}
 
 
 # Password validation
