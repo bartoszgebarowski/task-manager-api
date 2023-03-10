@@ -10,8 +10,6 @@ import mimetypes
 
 mimetypes.add_type("text/javascript", ".js", True)
 
-CLOUDINARY_STORAGE = {"CLOUDINARY_URL": os.environ.get("CLOUDINARY_URL")}
-
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -136,5 +134,6 @@ REST_FRAMEWORK = {
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = (
     "http://localhost:3000",
+    "http://localhost:8000",
     "https://pp5-task-manager.herokuapp.com",
 )
