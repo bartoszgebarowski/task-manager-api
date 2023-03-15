@@ -1,6 +1,5 @@
 import os
 from pathlib import Path
-
 import dj_database_url
 
 if os.path.isfile("env.py"):
@@ -137,3 +136,8 @@ CORS_ORIGIN_WHITELIST = (
     "http://localhost:8000",
     "https://pp5-task-manager.herokuapp.com",
 )
+
+
+SIMPLE_JWT = {
+    "TOKEN_OBTAIN_SERIALIZER": "profiles.serializers.MyTokenObtainPairSerializer",
+}

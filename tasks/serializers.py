@@ -19,6 +19,7 @@ class TaskSerializer(serializers.ModelSerializer):
             "id",
             "owner",
             "owner_id",
+            "title",
             "assignees",
             "assignees_details",
             "description",
