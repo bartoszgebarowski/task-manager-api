@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 import dj_database_url
+from datetime import timedelta
 
 if os.path.isfile("env.py"):
     import env
@@ -140,4 +141,6 @@ CORS_ORIGIN_WHITELIST = (
 
 SIMPLE_JWT = {
     "TOKEN_OBTAIN_SERIALIZER": "profiles.serializers.MyTokenObtainPairSerializer",
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
 }

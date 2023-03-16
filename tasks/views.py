@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from tasks.serializers import TaskSerializer
+from tasks.serializers import TaskSerializer, TaskCommentSerializer
 from tasks.models import Task
 from rest_framework import generics, mixins
 from rest_framework.permissions import IsAuthenticated
@@ -14,7 +14,7 @@ class TaskListView(
 
     def get_queryset(self):
         user = self.request.user
-        return Task.objects.filter(Q(owner=user) | Q(assignees=user))
+        return Task.objects.filter(Q(owner=user))
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
@@ -27,3 +27,8 @@ class TaskDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
     permission_classes = [IsAuthenticated]
+
+class TaskCommentAPIView(generics.CreateAPIView):
+    serializer_class = TaskCommentSerializer
+    permission_classes = [IsAuthenticated]
+
