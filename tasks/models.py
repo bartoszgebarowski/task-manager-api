@@ -19,12 +19,13 @@ class Task(models.Model):
     def __str__(self):
         return f"{self.title}"
 
+
 class TaskComment(models.Model):
     comment = models.TextField()
-    owner = models.ForeignKey(
-        TaskManagerUser, on_delete=models.CASCADE
+    owner = models.ForeignKey(TaskManagerUser, on_delete=models.CASCADE)
+    task = models.ForeignKey(
+        Task, on_delete=models.CASCADE, related_name="messages"
     )
-    task = models.ForeignKey(Task, on_delete=models.CASCADE, related_name="messages")
     created_at = models.DateTimeField(
         auto_now_add=True, editable=False, verbose_name="Created at"
     )
@@ -34,4 +35,3 @@ class TaskComment(models.Model):
 
     def __str__(self):
         return f"{self.comment}"
-
