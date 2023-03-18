@@ -35,6 +35,7 @@ class TaskSerializer(serializers.ModelSerializer):
             "owner",
             "owner_id",
             "title",
+            "completed",
             "messages",
             "description",
             "created_at",
