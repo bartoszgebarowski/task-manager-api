@@ -14,8 +14,7 @@ class TaskListView(
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        user = self.request.user
-        return Task.objects.filter(Q(owner=user))
+        return Task.objects.all()
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
