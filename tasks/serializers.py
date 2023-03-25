@@ -11,6 +11,9 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class TaskCommentSerializer(serializers.ModelSerializer):
+    owner = UserSerializer(read_only=True)
+    task_id = serializers.IntegerField(required=True)
+
     class Meta:
         model = TaskComment
         fields = [
@@ -18,10 +21,15 @@ class TaskCommentSerializer(serializers.ModelSerializer):
             "comment",
             "owner",
             "owner_id",
-            "task",
+            "task_id",
             "created_at",
             "updated_at",
         ]
+        read_only_fields = ["created_at", "updated_at", "task", "owner", "id"]
+
+    def save(self, **kwargs):
+        self.validated_data["owner_id"] = self.context["request"].user.id
+        return super().save(**kwargs)
 
 
 class TaskSerializer(serializers.ModelSerializer):
