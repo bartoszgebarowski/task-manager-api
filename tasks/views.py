@@ -35,13 +35,13 @@ class TaskDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
 
 class TaskCommentAPIView(generics.CreateAPIView):
     serializer_class = TaskCommentSerializer
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
 
 class TaskCommentUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = TaskComment.objects.all()
     serializer_class = TaskCommentSerializer
-    # permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
+    permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
 
     def get_queryset(self):
         queryset = super().get_queryset()
