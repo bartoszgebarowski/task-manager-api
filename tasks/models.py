@@ -1,8 +1,11 @@
 from django.db import models
+
 from profiles.models import TaskManagerUser
 
 
 class Task(models.Model):
+    """Task model"""
+
     title = models.CharField(max_length=100)
     owner = models.ForeignKey(
         TaskManagerUser, on_delete=models.CASCADE, related_name="task_owner"
@@ -21,6 +24,8 @@ class Task(models.Model):
 
 
 class TaskComment(models.Model):
+    """Task comment model"""
+
     comment = models.TextField()
     owner = models.ForeignKey(TaskManagerUser, on_delete=models.CASCADE)
     task = models.ForeignKey(

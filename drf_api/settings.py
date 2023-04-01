@@ -1,14 +1,9 @@
 import os
-from pathlib import Path
 import dj_database_url
 from datetime import timedelta
 
 if os.path.isfile("env.py"):
     import env
-
-import mimetypes
-
-mimetypes.add_type("text/javascript", ".js", True)
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
