@@ -71,7 +71,7 @@ This epic is for document-related stories. It provides essential documentation t
 
 4. Tasks
 - As a user, I want to be able to view, edit or delete a task
-- As a user, I want to be able to create and view a all tasks
+- As a user, I want to be able to create and view all tasks
 
 5. Comments
 - As a user, I want to be able to view, edit or delete a comment
@@ -161,6 +161,8 @@ DELETE: used for removing a task
 [Back to Table of contents](#table-of-contents)
 
 ## Database Design
+
+![Database diagram](readme/PP5-dbdiagram.png)
 ## Technologies
 * Django
     * main framework used to start a project
@@ -288,6 +290,7 @@ Postman software was used during development process for prototyping and testing
 
 * Create a POST request to `{{BASE_URL}}api/profiles/token/`
 *  In the Body tab add : 
+
 `{
     "username": "mytestuser",
     "password": "testtest"
@@ -296,7 +299,7 @@ Postman software was used during development process for prototyping and testing
 * Click Send button 
 * Server responds with status 200.
 
-1. Scenario 2:  User tries to login with incorrect credentials
+2. Scenario 2:  User tries to login with incorrect credentials
 
 * Create a POST request to `{{BASE_URL}}api/profiles/token/`
 *  In the Body tab add : 
@@ -309,18 +312,20 @@ Postman software was used during development process for prototyping and testing
 * Click Send button 
 * Server responds with status 401
 
-1. Scenario 3:  User tries to refresh his token
+3. Scenario 3:  User tries to refresh his token
 
 *  Create a POST request to  `{{BASE_URL}}api/profiles/token/refresh`
 * In the Body tab add : 
+
 `{
     "refresh": "{{JWT_REFRESH}}"
 }
 ` 
+
 * Click Send button
 * Access Token is refreshed
 
-1. Scenario 4: User tries to refresh token without login in 
+4. Scenario 4: User tries to refresh token without login in 
 
 * Create POST request to `{{BASE_URL}}api/profiles/token/`
 *   In the Body tab add : 
@@ -430,7 +435,7 @@ In all requests below it is important to take additional step, that is described
 * Click Send button
 * Server responds with status 401
 
-10. Scenario 10: User is logged and tries to update his own task 
+10. Scenario 10: User is logged in and tries to update his own task 
 
 * Login with correct credentials by POST request to `{{BASE_URL}}api/profiles/token/`
 * Create a PUT request to `{{BASE_URL}}api/tasks/task_id`
@@ -441,10 +446,11 @@ In all requests below it is important to take additional step, that is described
     "title": "test_1"
 }
 `
+
 * Click Send button
 * Server responds with status 200
 
-11. Scenario 11: User is logged and tries to update his own task without a title
+11. Scenario 11: User is logged in and tries to update his own task without a title
 
 * Login with correct credentials by POST request to `{{BASE_URL}}api/profiles/token/`
 * Create a PUT request to `{{BASE_URL}}api/tasks/task_id`
@@ -518,7 +524,6 @@ In all requests below it is important to take additional step, that is described
 * In the Body add: 
 
 `{
-    "task_id": 200,
     "comment": "comment"
 }`
 * Click Send button
@@ -567,7 +572,7 @@ In all requests below it is important to take additional step, that is described
 
 7. Scenario 7: User is not logged in and tries to delete a comment
 * Login with incorrect credentials by POST request to `{{BASE_URL}}api/profiles/token/`
-* Create DELETE request to `{{BASE_URL}}api/tasks/task_id/comments/comment_id_that_does_not_exists`
+* Create DELETE request to `{{BASE_URL}}api/tasks/task_id/comments/comment_id`
 * Click Send Button
 * Server responds with status 401
 
@@ -582,7 +587,7 @@ In all requests below it is important to take additional step, that is described
 }`
 
 * Click Send button
-* Server respodns with status 200
+* Server responds with status 200
 
 9. Scenario 9: User is logged in and tries to his own comment with empty comment
 * Login with correct credentials by POST request to `{{BASE_URL}}api/profiles/token/`
