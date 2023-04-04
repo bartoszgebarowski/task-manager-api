@@ -1,4 +1,4 @@
-# Task manager API 
+# Task Manager API 
 Task Manager API is the backend service used by the Task Manager application 
 
 ## Table of Contents 
@@ -13,7 +13,7 @@ Task Manager API is the backend service used by the Task Manager application
 * [Testing](#testing)
     * [Postman setup](#postman-setup)
     * [Testing API in Postman](#testing-api-in-postman)
-        * [Creating an user ](#creating-an-user)
+        * [Creating a user ](#creating-a-user)
         * [Login in ](#login-in)
         * [Important step for testing ](#important-step-for-testing)
         * [Tasks](#tasks)
@@ -39,13 +39,13 @@ The base setup epic is for all stories needed for the base setup of the applicat
 The prototype epic is for all stories needed to create an application prototype. Creating a prototype was an essential step of development, allowing new functionalities to be implemented and tested in a risk-free environment.
 
 3. Profiles
-The profiles epic is for all stories related to the creation of user profiles and user authentication.
+The profiles epic is for all stories related to the creation of user profiles (accounts) and user authentication.
 
 4. Tasks
 The tasks epic is for all stories related to tasks. Tasks are core content that the user can view and interact with.
 
 5. Comments
-The epic cover the user stories related to CRUD operations on comments
+The epic cover the user stories related to creating, editing, updating and deleting comments
 
 6. Deployment 
 This epic is for deployment-related stories. Hosting a site on Heroku allows connecting the backend to the frontend application.
@@ -66,7 +66,7 @@ This epic is for document-related stories. It provides essential documentation t
 - As a developer, I need to install and configure a tool to test various requests to the backend without the frontend application
 
 3. Profiles
-- As a user, I  want to be able to create a profile 
+- As a user, I  want to be able to create a profile (account)
 - As a user, I want to sign in and sign out of the service
 
 4. Tasks
@@ -211,7 +211,7 @@ DELETE: used for removing a task
 * whitenoise==6.3.0
     * allows web application to serve own static files. 
 
-Installed as package dependcies with above installations:
+Installed as package dependencies with the above installations:
 * asgiref==3.6.0
 * charset-normalizer==3.0.1
 * tzdata==2022.7
@@ -259,9 +259,9 @@ Postman software was used during development process for prototyping and testing
 [Back to Table of contents](#table-of-contents)
 
 ### Testing API in Postman 
-#### Creating an user 
+#### Creating a user 
 
-1. Scenerio 1 : User tries to create an account with a username that don't exists.
+1. Scenerio 1 : User tries to create an account with a username that does not exist.
 
 * Create a POST request to `{{BASE_URL}}api/profiles/create-user/`
 *  In the Body tab add : 
@@ -350,7 +350,7 @@ Postman software was used during development process for prototyping and testing
 
 ##### Important step for testing 
 
-In all requests below it is important to take additional step, that is described below:
+In all requests below, it is essential to take an additional step, that is described below:
 *  In the Headers tab add 
 `Key : Authorization` with value `Bearer  {{JWT_TOKEN}}`
 
@@ -421,7 +421,7 @@ In all requests below it is important to take additional step, that is described
 * Click Send button
 * Server responds with status 403
 
-8. Scenario 8: User is logged in and tries to delete a task that does not exists
+8. Scenario 8: User is logged in and tries to delete a task that does not exist
 * Login with correct credentials by POST request to `{{BASE_URL}}api/profiles/token/`
 * Create a DELETE request to `{{BASE_URL}}api/tasks/task_id`
 * Click Send button
@@ -488,7 +488,7 @@ In all requests below it is important to take additional step, that is described
 * Click Send button 
 * Server responds with status 401
 
-15. Scenario 15: User is logged in and tries to update a task that does not exists
+15. Scenario 15: User is logged in and tries to update a task that does not exist
 * Login with correct credentials by POST request to `{{BASE_URL}}api/profiles/token/`
 * Create a PUT request to `{{BASE_URL}}api/tasks/not_user_task_id`
 * In the Body add :
@@ -518,7 +518,7 @@ In all requests below it is important to take additional step, that is described
 * Click Send button
 * Server responds with status 201
 
-2. Scenario 2: User is logged in and tries to add a comment to the task that does not exists
+2. Scenario 2: User is logged in and tries to add a comment to the task that does not exist
 * Login with correct credentials by POST request to `{{BASE_URL}}api/profiles/token/`
 *  Create POST request to `{{BASE_URL}}api/tasks/not_task_id/comments`
 * In the Body add: 
@@ -527,7 +527,7 @@ In all requests below it is important to take additional step, that is described
     "comment": "comment"
 }`
 * Click Send button
-* Server responds with status 500, since it violates foreign key constraint
+* Server responds with status 500, since it violates a foreign key constraint
 
 3. Scenario 3: User is not logged in and tries to add a comment
 
@@ -543,7 +543,7 @@ In all requests below it is important to take additional step, that is described
 * Click Send button
 * Server responds with status 401
 
-4. Scenario 4: User is logged in and tries to add a empty comment
+4. Scenario 4: User is logged in and tries to add an empty comment
 
 * Login with correct credentials by POST request to `{{BASE_URL}}api/profiles/token/`
 * Create POST request to `{{BASE_URL}}api/tasks/task_id/comments`
@@ -556,7 +556,7 @@ In all requests below it is important to take additional step, that is described
 * Click Send button
 * Server responds with status 400
 
-5. Scenario 5: User is logged and tries to delete his own comment 
+5. Scenario 5: User is logged in and tries to delete his own comment 
 
 * Login with correct credentials by POST request to `{{BASE_URL}}api/profiles/token/`
 * Create DELETE request to `{{BASE_URL}}api/tasks/task_id/comments/comment_id`
@@ -576,7 +576,7 @@ In all requests below it is important to take additional step, that is described
 * Click Send Button
 * Server responds with status 401
 
-8. Scenario 8: User is logged and tries to update his own comment 
+8. Scenario 8: User is logged in and tries to update his own comment 
 * Login with correct credentials by POST request to `{{BASE_URL}}api/profiles/token/`
 * Create a PUT request to `{{BASE_URL}}api/profiles/token/`
 * Add to Body:
@@ -589,7 +589,7 @@ In all requests below it is important to take additional step, that is described
 * Click Send button
 * Server responds with status 200
 
-9. Scenario 9: User is logged in and tries to his own comment with empty comment
+9. Scenario 9: User is logged in and tries to his own comment with an empty comment
 * Login with correct credentials by POST request to `{{BASE_URL}}api/profiles/token/`
 * Create a PUT request to `{{BASE_URL}}api/tasks/task_id/comments/comment_id`
 * Add to Body:
@@ -627,9 +627,9 @@ In all requests below it is important to take additional step, that is described
 * Click Send Button
 * Server responds with status 401
 
-12. Scenario 12: User is logged and tries to update a comment that does not exists
+12. Scenario 12: User is logged in and tries to update a comment that does not exist
 * Login with correct credentials by POST request to `{{BASE_URL}}api/profiles/token/`
-* Create a PUT request to `{{BASE_URL}}api/tasks/task_id/comments/comment_id_that_does_not_exists`
+* Create a PUT request to `{{BASE_URL}}api/tasks/task_id/comments/comment_id_that_does_not_exist`
 * Add to Body:
 
 `{
@@ -643,8 +643,10 @@ In all requests below it is important to take additional step, that is described
 [Back to Table of contents](#table-of-contents)
 
 ### Django Framework code
-Django framework code was omitted in linting process.
+Django framework code was omitted in the linting process. The settings for flake8 can be found in the .flake8 file. 
+Besides the list of exceptions included in the above file, all code passed through flake8 with no issues.
 
+![Flake8 result](readme/black-flake8.png)
 ## Deployment
 #### Version Control
 The website was created in Virtual Studio Code editor, and changes were pushed to the GitHub repository https://github.com/bartoszgebarowski/lorecraft by using bash terminal. 
@@ -659,7 +661,7 @@ The following commands were used:
 
 ```git commit -m "commit message"``` - This command was used to commit all staged changes to a local repository
 
-```git push``` - This command was used to upload all committed locally changes to a GitHub repository
+```git push``` - This command was used to upload all committed local changes to a GitHub repository
 
 [Back to Table of contents](#table-of-contents)
 
